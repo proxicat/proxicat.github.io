@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProxiCat: Per-App Proxy Routing for Mac — 35+ Dev Tools | 2026</title>
-    <meta name="description" content="ProxiCat is a macOS proxy manager with per-app routing, 35+ dev tools (git, npm, docker), Wi-Fi auto-switch, and one-click toggle. Try free 14 days. $19 one-time.">
-    <meta name="keywords" content="proxy manager mac, per app proxy mac, proxy routing macos, socks proxy mac, http proxy mac, git proxy, npm proxy, docker proxy, proxy switch mac, proxy toggle macos, dev tools proxy, macos proxy settings, proxy tool 2026">
+    <meta name="description" content="ProxiCat: macOS proxy manager for Clash, V2Ray, Surge, Shadowsocks. Per-app routing, 35+ dev tools (git, npm, docker), Wi-Fi auto-switch. Free 14-day trial. $19.">
+    <meta name="keywords" content="proxy manager mac, per app proxy mac, proxy routing macos, clash mac proxy, v2ray mac proxy, surge proxy manager, shadowsocks mac, socks proxy mac, http proxy mac, git proxy, npm proxy, docker proxy, proxy switch mac, proxy toggle macos, dev tools proxy, macos proxy settings, proxy tool 2026">
     <meta property="og:title" content="ProxiCat: Per-App Proxy Routing for Mac">
     <meta property="og:description" content="One-click proxy for macOS. Per-app routing, 35+ dev tools, Wi-Fi auto-switch. Try free 14 days.">
     <meta property="og:type" content="website">
@@ -186,7 +186,7 @@
     <div class="container">
         <div class="hero-badge">🚀 New — 35+ dev tools supported in v1.0</div>
         <h1>Per-App Proxy Routing<br>for <span class="highlight">Every Mac Dev Tool</span></h1>
-        <p class="sub">Set it once — git, npm, docker, and 32 more tools get proxy settings automatically. Auto-switch by Wi-Fi. Toggle on/off with one click or Cmd+Shift+P.</p>
+        <p class="sub">Pair with Clash, V2Ray, Surge, or any proxy client. One toggle sets git, npm, docker, and 32 more tools. Auto-switch by Wi-Fi. Cmd+Shift+P from any app.</p>
         <div class="cta-row">
             <a href="https://github.com/proxicat/releases/releases" class="btn btn-primary">Get 14-Day Free Trial</a>
             <a href="#how" class="btn btn-secondary">See How It Works</a>
@@ -260,6 +260,26 @@
     </table>
 </div></section>
 
+<!-- Compatible proxy clients -->
+<section class="clients"><div class="container">
+    <h2>Works with your proxy client</h2>
+    <p class="sub" style="text-align:center;color:var(--dim);margin-bottom:var(--space-lg)">ProxiCat is the control layer on top of your existing proxy app. It configures where traffic goes — your proxy client handles the connection.</p>
+    <div class="tags">
+        <span class="tag">Clash</span><span class="tag">ClashX</span><span class="tag">Clash Verge</span>
+        <span class="tag">V2Ray</span><span class="tag">V2RayN</span><span class="tag">Xray</span>
+        <span class="tag">Shadowsocks</span><span class="tag">ShadowsocksX-NG</span>
+        <span class="tag">Trojan</span><span class="tag">Trojan-Go</span>
+        <span class="tag">Surge</span><span class="tag">Quantumult</span>
+        <span class="tag">Stash</span><span class="tag">Loon</span>
+        <span class="tag">sing-box</span><span class="tag">Mihomo</span>
+        <span class="tag">Hysteria</span><span class="tag">NaiveProxy</span>
+        <span class="tag">WireGuard</span><span class="tag">OpenVPN</span>
+        <span class="tag">SSH Tunnel</span><span class="tag">Privoxy</span>
+        <span class="tag">Any SOCKS5/HTTP proxy</span>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:var(--space-lg)">ProxiCat auto-detects your running proxy client, validates listening ports, and prevents proxy loops.</p>
+</div></section>
+
 <!-- Use Cases -->
 <section class="usecases"><div class="container">
     <h2>Built for real workflows</h2>
@@ -325,7 +345,7 @@
         <details class="faq-item"><summary>Is it really $19 one-time? No subscription?</summary><p>Yes. One purchase, use forever. No monthly fees. Free updates within the major version. 14-day free trial to try before you buy.</p></details>
         <details class="faq-item"><summary>What if it breaks my network settings?</summary><p>ProxiCat automatically backs up your system settings on first launch. One-click restore returns everything — env vars, system proxy, DNS, git config, npm config, /etc/hosts — to exactly how it was before.</p></details>
         <details class="faq-item"><summary>Can I get a refund?</summary><p>Yes. 30-day money-back guarantee, no questions asked.</p></details>
-        <details class="faq-item"><summary>Does it work with my proxy client (Clash, V2Ray, Shadowsocks, etc.)?</summary><p>Yes. ProxiCat works with any local proxy that listens on HTTP or SOCKS5. It auto-detects 30+ known proxy clients and validates that ports match your configuration.</p></details>
+        <details class="faq-item"><summary>Does it work with my proxy client (Clash, V2Ray, Surge, Shadowsocks, etc.)?</summary><p>Yes. ProxiCat is designed to work alongside your existing proxy client — Clash, ClashX, V2Ray, Xray, Surge, Shadowsocks, Trojan, sing-box, Hysteria, WireGuard, SSH tunnels, or any app that provides a local SOCKS5/HTTP proxy. ProxiCat auto-detects running proxy clients, validates port configuration, and prevents proxy loops.</p></details>
         <details class="faq-item"><summary>Why not just use System Preferences?</summary><p>System proxy only covers apps that read macOS proxy settings. Many CLI tools (git, npm, curl) and some GUI apps ignore it. ProxiCat covers 4 layers: shell env, system proxy, per-tool config, and system-level interception.</p></details>
         <details class="faq-item"><summary>Does it support Apple Silicon (M1/M2/M3/M4)?</summary><p>Yes. ProxiCat is built natively with SwiftUI for arm64. No Rosetta needed. Runs on macOS 15 (Sequoia) and later.</p></details>
     </div>
