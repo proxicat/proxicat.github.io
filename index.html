@@ -3,267 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProxiCat — Mac Proxy Manager | Per-App Proxy Routing for macOS</title>
-    <meta name="description" content="ProxiCat is a modern proxy manager for macOS. Per-app proxy routing, dev tools integration, Wi-Fi auto-switch, one-click toggle. The best proxy tool for Mac.">
-    <meta name="keywords" content="proxy manager mac, proxy tool macos, per app proxy mac, proxy routing mac, socks proxy mac, http proxy mac, dev tools proxy, git proxy, npm proxy, proxy switch mac, proxy toggle, macos proxy settings">
-    <meta property="og:title" content="ProxiCat — Mac Proxy Manager">
-    <meta property="og:description" content="The modern proxy manager for macOS. Per-app routing, dev tools integration, one-click toggle.">
+    <title>ProxiCat: Per-App Proxy Routing for Mac — 35+ Dev Tools | 2026</title>
+    <meta name="description" content="ProxiCat is a macOS proxy manager with per-app routing, 35+ dev tools (git, npm, docker), Wi-Fi auto-switch, and one-click toggle. Try free 14 days. $19 one-time.">
+    <meta name="keywords" content="proxy manager mac, per app proxy mac, proxy routing macos, socks proxy mac, http proxy mac, git proxy, npm proxy, docker proxy, proxy switch mac, proxy toggle macos, dev tools proxy, macos proxy settings, proxy tool 2026">
+    <meta property="og:title" content="ProxiCat: Per-App Proxy Routing for Mac">
+    <meta property="og:description" content="One-click proxy for macOS. Per-app routing, 35+ dev tools, Wi-Fi auto-switch. Try free 14 days.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://proxicat.github.io">
+    <meta property="og:image" content="https://proxicat.github.io/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://proxicat.github.io">
     <style>
         :root {
-            --bg: #0d1117;
-            --card: #161b22;
-            --text: #e6edf3;
-            --dim: #8b949e;
-            --accent: #58a6ff;
-            --green: #3fb950;
-            --orange: #d29922;
-            --border: #30363d;
+            --bg: #0a0e14; --card: #141921; --card2: #1a2030;
+            --text: #e6edf3; --dim: #8b949e; --muted: #484f58;
+            --accent: #58a6ff; --green: #3fb950; --orange: #d29922; --red: #f85149;
+            --border: #21262d;
+            --space-xs: 4px; --space-sm: 8px; --space-md: 16px; --space-lg: 24px; --space-xl: 48px; --space-2xl: 64px; --space-3xl: 96px;
         }
         @media (prefers-color-scheme: light) {
             :root {
-                --bg: #ffffff;
-                --card: #f6f8fa;
-                --text: #1f2328;
-                --dim: #656d76;
-                --accent: #0969da;
-                --green: #1a7f37;
-                --orange: #9a6700;
+                --bg: #fff; --card: #f6f8fa; --card2: #eef1f5;
+                --text: #1f2328; --dim: #656d76; --muted: #b1bac4;
+                --accent: #0969da; --green: #1a7f37; --orange: #9a6700; --red: #d1242f;
                 --border: #d0d7de;
             }
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-        .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 960px; margin: 0 auto; padding: 0 var(--space-lg); }
+        a { color: var(--accent); text-decoration: none; }
+        a:focus, button:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+        img { max-width: 100%; height: auto; }
+        section { padding: var(--space-3xl) 0; }
 
-        /* Hero */
-        .hero { text-align: center; padding: 80px 0 60px; }
-        .hero-icon { font-size: 72px; margin-bottom: 16px; }
-        .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 8px; }
-        .hero h1 span { color: var(--accent); }
-        .hero .tagline { font-size: 20px; color: var(--dim); margin-bottom: 32px; }
-        .hero .cta { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; padding: 14px 32px; border-radius: 8px; font-size: 16px; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
-        .hero .cta:hover { opacity: 0.9; }
-        .hero .cta-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); margin-left: 12px; }
-        .hero .price { margin-top: 16px; color: var(--dim); font-size: 14px; }
+        /* ── Nav ── */
+        nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); }
+        nav .inner { display: flex; align-items: center; justify-content: space-between; padding: var(--space-md) var(--space-lg); max-width: 960px; margin: 0 auto; }
+        nav .brand { font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 6px; }
+        nav .links { display: flex; gap: var(--space-lg); align-items: center; font-size: 14px; }
+        nav .links a { color: var(--dim); } nav .links a:hover { color: var(--text); }
+        .nav-cta { background: var(--accent); color: #fff !important; padding: 6px 16px; border-radius: 6px; font-weight: 600; font-size: 13px; }
 
-        /* Features */
-        .features { padding: 60px 0; }
-        .features h2 { text-align: center; font-size: 32px; margin-bottom: 48px; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-        .feature-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
-        .feature-card .icon { font-size: 28px; margin-bottom: 12px; }
-        .feature-card h3 { font-size: 18px; margin-bottom: 8px; }
-        .feature-card p { color: var(--dim); font-size: 14px; }
+        /* ── Hero ── */
+        .hero { text-align: center; padding: var(--space-3xl) 0 var(--space-xl); }
+        .hero-badge { display: inline-block; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 4px 14px; font-size: 13px; color: var(--dim); margin-bottom: var(--space-lg); }
+        .hero h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; line-height: 1.15; margin-bottom: var(--space-md); letter-spacing: -0.5px; }
+        .hero h1 .highlight { background: linear-gradient(135deg, var(--accent), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero .sub { font-size: 18px; color: var(--dim); max-width: 600px; margin: 0 auto var(--space-xl); line-height: 1.6; }
+        .cta-row { display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; margin-bottom: var(--space-md); }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; border: none; cursor: pointer; transition: opacity .15s; }
+        .btn:hover { opacity: 0.9; }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
+        .hero .meta { color: var(--muted); font-size: 13px; }
 
-        /* Coverage */
-        .coverage { padding: 60px 0; }
-        .coverage h2 { text-align: center; font-size: 32px; margin-bottom: 16px; }
-        .coverage .subtitle { text-align: center; color: var(--dim); margin-bottom: 48px; }
-        .coverage-table { width: 100%; border-collapse: collapse; }
-        .coverage-table th, .coverage-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
-        .coverage-table th { color: var(--dim); font-weight: 500; font-size: 13px; text-transform: uppercase; }
-        .check { color: var(--green); }
-        .warn { color: var(--orange); }
+        /* ── App mockup ── */
+        .app-mockup { max-width: 400px; margin: var(--space-xl) auto 0; }
+        .mockup-frame { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,.4); }
+        .mockup-titlebar { background: var(--card2); padding: 10px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-r { background: var(--red); } .dot-y { background: var(--orange); } .dot-g { background: var(--green); }
+        .mockup-title { font-size: 12px; color: var(--dim); margin-left: 4px; }
+        .mockup-body { padding: var(--space-md); font-size: 12px; }
+        .mock-header { display: flex; align-items: center; gap: 10px; margin-bottom: var(--space-md); }
+        .mock-power { width: 32px; height: 32px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; }
+        .mock-status { font-size: 13px; font-weight: 600; }
+        .mock-sub { font-size: 10px; color: var(--dim); }
+        .mock-health { display: flex; gap: var(--space-md); padding: 6px 10px; background: var(--card2); border-radius: 6px; margin-bottom: var(--space-sm); font-size: 10px; color: var(--dim); }
+        .mock-health .hd { width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-right: 3px; display: inline-block; }
+        .mock-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 11px; border-bottom: 1px solid var(--border); }
+        .mock-row .k { color: var(--dim); } .mock-row .v { font-family: 'SF Mono', monospace; color: var(--text); font-size: 10px; }
+        .mock-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: var(--space-sm); }
+        .mock-chip { background: var(--card2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; font-size: 9px; display: flex; align-items: center; gap: 3px; }
+        .mock-chip .c { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+        .mock-section { font-size: 11px; font-weight: 600; margin: var(--space-sm) 0 4px; }
+        .mock-rule { display: flex; align-items: center; gap: 6px; padding: 4px 6px; background: var(--card2); border-radius: 4px; margin-bottom: 3px; font-size: 10px; }
+        .mock-rule .badge { font-size: 8px; padding: 1px 5px; border-radius: 3px; }
+        .badge-direct { background: rgba(63,185,80,.15); color: var(--green); }
+        .badge-running { background: rgba(63,185,80,.1); color: var(--green); font-size: 8px; padding: 0 4px; border-radius: 8px; }
+        .mock-footer { display: flex; gap: 4px; margin-top: var(--space-sm); }
+        .mock-btn { flex: 1; text-align: center; padding: 5px; border-radius: 5px; font-size: 10px; font-weight: 600; }
+        .mock-btn-primary { background: var(--accent); color: #fff; }
+        .mock-btn-secondary { background: var(--card2); border: 1px solid var(--border); color: var(--text); }
 
-        /* Comparison */
-        .comparison { padding: 60px 0; }
-        .comparison h2 { text-align: center; font-size: 32px; margin-bottom: 16px; }
-        .comparison .subtitle { text-align: center; color: var(--dim); margin-bottom: 48px; }
-        .comp-table { width: 100%; border-collapse: collapse; }
-        .comp-table th, .comp-table td { padding: 10px 16px; text-align: center; border-bottom: 1px solid var(--border); font-size: 14px; }
-        .comp-table th:first-child, .comp-table td:first-child { text-align: left; }
-        .comp-table .highlight { background: var(--card); }
+        /* ── Social proof strip ── */
+        .proof { text-align: center; padding: var(--space-xl) 0; border-bottom: 1px solid var(--border); }
+        .proof-items { display: flex; justify-content: center; gap: var(--space-xl); flex-wrap: wrap; }
+        .proof-item { font-size: 14px; color: var(--dim); }
+        .proof-item strong { color: var(--text); font-size: 24px; display: block; }
 
-        /* Dev Tools */
-        .devtools { padding: 60px 0; }
-        .devtools h2 { text-align: center; font-size: 32px; margin-bottom: 16px; }
-        .devtools .subtitle { text-align: center; color: var(--dim); margin-bottom: 32px; }
-        .tool-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-        .tool-tag { background: var(--card); border: 1px solid var(--border); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-family: 'SF Mono', monospace; }
+        /* ── How it works ── */
+        .steps { counter-reset: step; }
+        .steps h2 { text-align: center; font-size: 30px; margin-bottom: var(--space-xl); }
+        .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg); }
+        .step { counter-increment: step; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: var(--space-lg); position: relative; }
+        .step::before { content: counter(step); position: absolute; top: -12px; left: var(--space-lg); background: var(--accent); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+        .step h3 { font-size: 16px; margin-bottom: var(--space-sm); margin-top: var(--space-sm); }
+        .step p { font-size: 13px; color: var(--dim); }
 
-        /* Footer */
-        footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: var(--dim); font-size: 13px; }
-        footer a { color: var(--accent); text-decoration: none; }
-        footer .links { margin-bottom: 8px; }
-        footer .links a { margin: 0 12px; }
+        /* ── Features ── */
+        .features h2 { text-align: center; font-size: 30px; margin-bottom: var(--space-sm); }
+        .features .sub { text-align: center; color: var(--dim); margin-bottom: var(--space-xl); font-size: 16px; }
+        .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: var(--space-lg); }
+        .feat { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: var(--space-lg); }
+        .feat .icon { font-size: 24px; margin-bottom: var(--space-sm); }
+        .feat h3 { font-size: 16px; margin-bottom: var(--space-xs); }
+        .feat p { font-size: 13px; color: var(--dim); line-height: 1.5; }
 
-        /* SEO hidden content */
-        .seo-text { position: absolute; left: -9999px; }
+        /* ── Coverage ── */
+        .coverage h2 { text-align: center; font-size: 30px; margin-bottom: var(--space-xl); }
+        .cov-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .cov-table th, .cov-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+        .cov-table th { color: var(--muted); font-size: 12px; text-transform: uppercase; font-weight: 500; }
+        .chk { color: var(--green); }
+
+        /* ── Comparison ── */
+        .comparison h2 { text-align: center; font-size: 30px; margin-bottom: var(--space-sm); }
+        .comparison .sub { text-align: center; color: var(--dim); margin-bottom: var(--space-xl); }
+        .cmp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .cmp-table th, .cmp-table td { padding: 10px 14px; text-align: center; border-bottom: 1px solid var(--border); }
+        .cmp-table th:first-child, .cmp-table td:first-child { text-align: left; }
+        .cmp-table .hl { background: var(--card); }
+
+        /* ── Dev Tools ── */
+        .devtools h2 { text-align: center; font-size: 30px; margin-bottom: var(--space-sm); }
+        .devtools .sub { text-align: center; color: var(--dim); margin-bottom: var(--space-lg); }
+        .tags { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-sm); }
+        .tag { background: var(--card); border: 1px solid var(--border); padding: 5px 14px; border-radius: 20px; font-size: 13px; font-family: 'SF Mono', monospace; }
+
+        /* ── Use Cases ── */
+        .usecases h2 { text-align: center; font-size: 30px; margin-bottom: var(--space-xl); }
+        .uc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg); }
+        .uc { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: var(--space-lg); }
+        .uc .persona { font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; margin-bottom: var(--space-sm); }
+        .uc h3 { font-size: 16px; margin-bottom: var(--space-sm); }
+        .uc p { font-size: 13px; color: var(--dim); }
+
+        /* ── FAQ ── */
+        .faq h2 { text-align: center; font-size: 30px; margin-bottom: var(--space-xl); }
+        .faq-list { max-width: 640px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: var(--space-lg) 0; }
+        .faq-item summary { font-weight: 600; font-size: 15px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
+        .faq-item summary::after { content: "+"; color: var(--dim); font-size: 18px; }
+        .faq-item[open] summary::after { content: "−"; }
+        .faq-item p { margin-top: var(--space-sm); font-size: 14px; color: var(--dim); line-height: 1.6; }
+
+        /* ── CTA band ── */
+        .cta-band { text-align: center; padding: var(--space-3xl) 0; background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .cta-band h2 { font-size: 30px; margin-bottom: var(--space-sm); }
+        .cta-band p { color: var(--dim); margin-bottom: var(--space-lg); }
+
+        /* ── Footer ── */
+        footer { padding: var(--space-xl) 0; text-align: center; color: var(--muted); font-size: 12px; }
+        footer .links { margin-bottom: var(--space-sm); }
+        footer .links a { color: var(--dim); margin: 0 var(--space-md); font-size: 13px; }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 28px; }
+            .feat-grid, .step-grid, .uc-grid { grid-template-columns: 1fr; }
+            .cmp-table { font-size: 11px; }
+            nav .links { gap: var(--space-sm); font-size: 12px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-icon">🐱</div>
-        <h1>Proxi<span>Cat</span></h1>
-        <p class="tagline">The modern proxy manager for macOS</p>
-        <a href="https://github.com/proxicat/releases/releases" class="cta">Download for Mac</a>
-        <a href="https://github.com/proxicat/ProxiCat" class="cta cta-secondary">View Source</a>
-        <p class="price">Free 14-day trial. Then $19 one-time purchase.</p>
-    </section>
-
-    <!-- Features -->
-    <section class="features">
-        <h2>Everything you need to manage proxies on Mac</h2>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="icon">⚡</div>
-                <h3>One-Click Toggle</h3>
-                <p>Menu bar icon with power button. Toggle proxy on/off instantly. Global shortcut Cmd+Shift+P works from any app.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">📋</div>
-                <h3>Multi-Profile</h3>
-                <p>Create profiles for Office, Home, Travel. Each with its own proxy addresses, DNS, hosts, and dev tool settings.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">📶</div>
-                <h3>Wi-Fi Auto-Switch</h3>
-                <p>Bind profiles to Wi-Fi networks. Connect to "Office-5G" and the office proxy profile activates automatically.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🔧</div>
-                <h3>Dev Tools Integration</h3>
-                <p>One click sets proxy for git, npm, yarn, pip, docker, brew, cargo, go, gcloud, and 30+ more tools.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🛡️</div>
-                <h3>Per-App Routing</h3>
-                <p>Force specific apps through proxy, let others bypass, or block connections entirely. Direct/Proxy/Block per app.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">💚</div>
-                <h3>Health Monitoring</h3>
-                <p>Real-time proxy endpoint health. TCP ping with latency display. Detects your proxy client and validates ports.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🔒</div>
-                <h3>Auth & DNS & Hosts</h3>
-                <p>Proxy authentication, custom DNS servers, and /etc/hosts entries — all per profile, all reversible.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">💾</div>
-                <h3>Backup & Restore</h3>
-                <p>Automatic system backup on first use. One-click restore to undo all proxy changes and return to original state.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🐚</div>
-                <h3>Shell Aware</h3>
-                <p>Auto-detects zsh, bash, or fish. Writes correct syntax to the right config file. Copy/paste export commands too.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Coverage -->
-    <section class="coverage">
-        <h2>Proxy Coverage Layers</h2>
-        <p class="subtitle">ProxiCat covers your entire system, not just one app</p>
-        <table class="coverage-table">
-            <thead>
-                <tr><th>Layer</th><th>What's covered</th><th>How</th></tr>
-            </thead>
-            <tbody>
-                <tr><td><span class="check">✓</span> CLI & Scripts</td><td>curl, wget, python, ruby</td><td>Shell env vars (HTTP_PROXY)</td></tr>
-                <tr><td><span class="check">✓</span> macOS GUI Apps</td><td>Safari, Chrome, Slack</td><td>System proxy (networksetup)</td></tr>
-                <tr><td><span class="check">✓</span> Dev Tools</td><td>git, npm, docker, 30+ tools</td><td>Tool-specific config commands</td></tr>
-                <tr><td><span class="check">✓</span> All Apps (forced)</td><td>Every app, even stubborn ones</td><td>Network Extension (system-level)</td></tr>
-            </tbody>
-        </table>
-    </section>
-
-    <!-- Comparison -->
-    <section class="comparison">
-        <h2>How does it compare?</h2>
-        <p class="subtitle">Looking for a Mac proxy routing tool? Here's how the options stack up.</p>
-        <table class="comp-table">
-            <thead>
-                <tr><th>Feature</th><th class="highlight">ProxiCat</th><th>Other tools ($40)</th><th>System Settings</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Per-app proxy routing</td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td><td>✗</td></tr>
-                <tr><td>Dev tools (git, npm, docker)</td><td class="highlight"><span class="check">✓</span> 35+ tools</td><td>✗</td><td>✗</td></tr>
-                <tr><td>Multi-profile</td><td class="highlight"><span class="check">✓</span></td><td>✓</td><td>✗</td></tr>
-                <tr><td>Wi-Fi auto-switch</td><td class="highlight"><span class="check">✓</span></td><td>✗</td><td>✗</td></tr>
-                <tr><td>DNS + Hosts per profile</td><td class="highlight"><span class="check">✓</span></td><td>✗</td><td>✗</td></tr>
-                <tr><td>Health monitoring</td><td class="highlight"><span class="check">✓</span></td><td>✗</td><td>✗</td></tr>
-                <tr><td>System backup & restore</td><td class="highlight"><span class="check">✓</span></td><td>✗</td><td>✗</td></tr>
-                <tr><td>Shell aware (zsh/bash/fish)</td><td class="highlight"><span class="check">✓</span></td><td>✗</td><td>✗</td></tr>
-                <tr><td>Native macOS (SwiftUI)</td><td class="highlight"><span class="check">✓</span></td><td>✗ (C++)</td><td>✓</td></tr>
-                <tr><td>Price</td><td class="highlight"><strong>$19</strong></td><td>$40</td><td>Free (limited)</td></tr>
-            </tbody>
-        </table>
-    </section>
-
-    <!-- Dev Tools -->
-    <section class="devtools">
-        <h2>35+ Dev Tools Supported</h2>
-        <p class="subtitle">One toggle to set proxy for all your tools</p>
-        <div class="tool-tags">
-            <span class="tool-tag">git</span>
-            <span class="tool-tag">npm</span>
-            <span class="tool-tag">yarn</span>
-            <span class="tool-tag">pnpm</span>
-            <span class="tool-tag">pip</span>
-            <span class="tool-tag">conda</span>
-            <span class="tool-tag">cargo</span>
-            <span class="tool-tag">go</span>
-            <span class="tool-tag">brew</span>
-            <span class="tool-tag">docker</span>
-            <span class="tool-tag">pod</span>
-            <span class="tool-tag">gradle</span>
-            <span class="tool-tag">maven</span>
-            <span class="tool-tag">composer</span>
-            <span class="tool-tag">gcloud</span>
-            <span class="tool-tag">aws</span>
-            <span class="tool-tag">kubectl</span>
-            <span class="tool-tag">terraform</span>
-            <span class="tool-tag">curl</span>
-            <span class="tool-tag">wget</span>
-            <span class="tool-tag">ollama</span>
-            <span class="tool-tag">claude</span>
-            <span class="tool-tag">bun</span>
-            <span class="tool-tag">swift</span>
-            <span class="tool-tag">xcodebuild</span>
-        </div>
-    </section>
-</div>
-
-<footer>
-    <div class="container">
-        <div class="links">
-            <a href="https://github.com/proxicat/releases/releases">Download</a>
-            <a href="https://github.com/proxicat/releases/blob/main/PRIVACY.md">Privacy</a>
-            <a href="https://github.com/proxicat/releases/blob/main/TERMS.md">Terms</a>
-            <a href="https://github.com/proxicat/releases/issues">Support</a>
-        </div>
-        <p>&copy; 2026 ProxiCat. Built with SwiftUI for macOS.</p>
+<!-- Nav -->
+<nav><div class="inner">
+    <div class="brand">🐱 ProxiCat</div>
+    <div class="links">
+        <a href="#features">Features</a>
+        <a href="#how">How It Works</a>
+        <a href="#compare">Compare</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/proxicat/releases/releases" class="nav-cta">Download</a>
     </div>
-</footer>
+</div></nav>
 
-<!-- SEO: structured data -->
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">🚀 New — 35+ dev tools supported in v1.0</div>
+        <h1>Per-App Proxy Routing<br>for <span class="highlight">Every Mac Dev Tool</span></h1>
+        <p class="sub">Set it once — git, npm, docker, and 32 more tools get proxy settings automatically. Auto-switch by Wi-Fi. Toggle on/off with one click or Cmd+Shift+P.</p>
+        <div class="cta-row">
+            <a href="https://github.com/proxicat/releases/releases" class="btn btn-primary">Get 14-Day Free Trial</a>
+            <a href="#how" class="btn btn-secondary">See How It Works</a>
+        </div>
+        <p class="meta">macOS 15+ &middot; $19 one-time &middot; No subscription &middot; 30-day refund</p>
+
+        <!-- App UI mockup -->
+        <div class="app-mockup">
+            <div class="mockup-frame">
+                <div class="mockup-titlebar">
+                    <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+                    <span class="mockup-title">ProxiCat</span>
+                </div>
+                <div class="mockup-body">
+                    <div class="mock-header">
+                        <div class="mock-power">⏻</div>
+                        <div><div class="mock-status">Proxy Active</div><div class="mock-sub">Default via yunti · on Office-5G</div></div>
+                    </div>
+                    <div class="mock-health">
+                        <span><span class="hd"></span>HTTP 2ms</span>
+                        <span><span class="hd"></span>HTTPS 2ms</span>
+                        <span><span class="hd"></span>SOCKS 1ms</span>
+                    </div>
+                    <div class="mock-row"><span class="k">HTTP</span><span class="v">http://127.0.0.1:14841</span></div>
+                    <div class="mock-row"><span class="k">HTTPS</span><span class="v">http://127.0.0.1:14841</span></div>
+                    <div class="mock-row"><span class="k">SOCKS</span><span class="v">socks5://127.0.0.1:16650</span></div>
+                    <div class="mock-section">Dev Tools</div>
+                    <div class="mock-chips">
+                        <span class="mock-chip"><span class="c"></span>git</span>
+                        <span class="mock-chip"><span class="c"></span>npm</span>
+                        <span class="mock-chip"><span class="c"></span>yarn</span>
+                        <span class="mock-chip"><span class="c"></span>docker</span>
+                        <span class="mock-chip"><span class="c"></span>pip</span>
+                        <span class="mock-chip"><span class="c"></span>brew</span>
+                    </div>
+                    <div class="mock-section">App Rules</div>
+                    <div class="mock-rule">
+                        <span style="color:var(--green)">↩</span> WeChat
+                        <span class="badge badge-direct">Direct</span>
+                        <span class="badge-running">running</span>
+                    </div>
+                    <div class="mock-footer">
+                        <div class="mock-btn mock-btn-primary">Apply</div>
+                        <div class="mock-btn mock-btn-secondary">Clean</div>
+                        <div class="mock-btn mock-btn-secondary">Copy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Social proof -->
+<div class="proof"><div class="container">
+    <div class="proof-items">
+        <div class="proof-item"><strong>35+</strong>Dev tools supported</div>
+        <div class="proof-item"><strong>4</strong>Proxy coverage layers</div>
+        <div class="proof-item"><strong>&lt;5min</strong>Setup time</div>
+        <div class="proof-item"><strong>$19</strong>One-time, forever</div>
+    </div>
+</div></div>
+
+<!-- How it works -->
+<section class="steps" id="how"><div class="container">
+    <h2>Up and running in 3 steps</h2>
+    <div class="step-grid">
+        <div class="step">
+            <h3>Create a Profile</h3>
+            <p>Set proxy addresses (HTTP, HTTPS, SOCKS), bind your proxy client app, and optionally configure DNS and /etc/hosts.</p>
+        </div>
+        <div class="step">
+            <h3>Pick Your Tools</h3>
+            <p>Toggle which dev tools get proxy settings — git, npm, docker, brew, and 30+ more. Or add your own custom commands.</p>
+        </div>
+        <div class="step">
+            <h3>Toggle and Go</h3>
+            <p>Hit the power button or press Cmd+Shift+P from any app. Assign Wi-Fi networks to profiles for automatic switching.</p>
+        </div>
+    </div>
+</div></section>
+
+<!-- Features -->
+<section class="features" id="features"><div class="container">
+    <h2>Everything you need. Nothing you don't.</h2>
+    <p class="sub">Built natively in SwiftUI. No Electron. No Java. Just a fast menu bar app.</p>
+    <div class="feat-grid">
+        <div class="feat"><div class="icon">⚡</div><h3>One-Click Toggle</h3><p>Menu bar power button. Global shortcut Cmd+Shift+P. Toggle proxy from any app without switching windows.</p></div>
+        <div class="feat"><div class="icon">📋</div><h3>Multi-Profile</h3><p>Create profiles for Office, Home, Travel. Each with its own proxy addresses, DNS servers, hosts entries, and dev tool settings.</p></div>
+        <div class="feat"><div class="icon">📶</div><h3>Wi-Fi Auto-Switch</h3><p>Bind profiles to Wi-Fi networks. Connect to "Office-5G" and the office proxy activates automatically. No manual toggling.</p></div>
+        <div class="feat"><div class="icon">🔧</div><h3>35+ Dev Tools</h3><p>One toggle sets proxy for git, npm, yarn, pip, docker, brew, cargo, go, gcloud, kubectl, and more. Add custom tools too.</p></div>
+        <div class="feat"><div class="icon">🛡️</div><h3>Per-App Routing</h3><p>Force specific apps through proxy. Let your proxy client bypass. Block connections entirely. Direct / Proxy / Block per app.</p></div>
+        <div class="feat"><div class="icon">💚</div><h3>Health Monitoring</h3><p>Real-time TCP ping to all proxy endpoints. See latency in milliseconds. Detects your proxy client and validates ports match.</p></div>
+        <div class="feat"><div class="icon">🔒</div><h3>Auth, DNS, Hosts</h3><p>Proxy authentication embedded in URLs. Custom DNS servers per profile. /etc/hosts entries per profile. All reversible.</p></div>
+        <div class="feat"><div class="icon">💾</div><h3>Backup & Restore</h3><p>Automatic system snapshot on first use. One-click restore undoes every change — env vars, system proxy, DNS, git, npm, hosts.</p></div>
+        <div class="feat"><div class="icon">🐚</div><h3>Shell Aware</h3><p>Detects zsh, bash, or fish. Writes correct export syntax to the right config file. Copy/paste commands for terminal use.</p></div>
+    </div>
+</div></section>
+
+<!-- Coverage -->
+<section class="coverage"><div class="container">
+    <h2>4 layers of proxy coverage</h2>
+    <table class="cov-table">
+        <thead><tr><th>Layer</th><th>What's covered</th><th>How</th></tr></thead>
+        <tbody>
+            <tr><td><span class="chk">✓</span> CLI & Scripts</td><td>curl, wget, python, ruby</td><td>Shell env vars (HTTP_PROXY)</td></tr>
+            <tr><td><span class="chk">✓</span> macOS GUI Apps</td><td>Safari, Chrome, Slack, VS Code</td><td>System proxy (networksetup)</td></tr>
+            <tr><td><span class="chk">✓</span> Dev Tools</td><td>git, npm, docker + 32 more</td><td>Tool-specific config commands</td></tr>
+            <tr><td><span class="chk">✓</span> All Apps (forced)</td><td>Every app, even stubborn ones</td><td>Network Extension (system-level)</td></tr>
+        </tbody>
+    </table>
+</div></section>
+
+<!-- Use Cases -->
+<section class="usecases"><div class="container">
+    <h2>Built for real workflows</h2>
+    <div class="uc-grid">
+        <div class="uc">
+            <div class="persona">Remote Developer</div>
+            <h3>"I work from home and the office"</h3>
+            <p>Office profile with corporate proxy activates when you connect to Office-5G. Home profile uses your VPN. Zero manual switching.</p>
+        </div>
+        <div class="uc">
+            <div class="persona">Full-Stack Engineer</div>
+            <h3>"My git, npm, docker all need proxy"</h3>
+            <p>Toggle one switch — git config, npm config, docker env, kubectl, brew, pip all get proxy settings instantly. Disable removes them all.</p>
+        </div>
+        <div class="uc">
+            <div class="persona">Corporate Network</div>
+            <h3>"Our proxy requires authentication"</h3>
+            <p>Enter username/password once. ProxiCat embeds credentials into every proxy URL automatically. Stored securely, never exposed in UI.</p>
+        </div>
+    </div>
+</div></section>
+
+<!-- Comparison -->
+<section class="comparison" id="compare"><div class="container">
+    <h2>How does ProxiCat compare?</h2>
+    <p class="sub">Looking for a Mac proxy routing tool? Here's how the options stack up.</p>
+    <table class="cmp-table">
+        <thead><tr><th>Feature</th><th class="hl">ProxiCat</th><th>Other tools ($40)</th><th>System Settings</th></tr></thead>
+        <tbody>
+            <tr><td>Per-app proxy routing</td><td class="hl"><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td>✗</td></tr>
+            <tr><td>Dev tools (git, npm, docker...)</td><td class="hl"><span class="chk">✓</span> 35+</td><td>✗</td><td>✗</td></tr>
+            <tr><td>Multi-profile</td><td class="hl"><span class="chk">✓</span></td><td>✓</td><td>✗</td></tr>
+            <tr><td>Wi-Fi auto-switch</td><td class="hl"><span class="chk">✓</span></td><td>✗</td><td>✗</td></tr>
+            <tr><td>DNS + Hosts per profile</td><td class="hl"><span class="chk">✓</span></td><td>✗</td><td>✗</td></tr>
+            <tr><td>Health monitoring</td><td class="hl"><span class="chk">✓</span></td><td>✗</td><td>✗</td></tr>
+            <tr><td>System backup & restore</td><td class="hl"><span class="chk">✓</span></td><td>✗</td><td>✗</td></tr>
+            <tr><td>Native macOS (SwiftUI)</td><td class="hl"><span class="chk">✓</span></td><td>✗</td><td>✓</td></tr>
+            <tr><td>Price</td><td class="hl"><strong>$19</strong></td><td>$40</td><td>Free</td></tr>
+        </tbody>
+    </table>
+</div></section>
+
+<!-- Dev tools -->
+<section class="devtools"><div class="container">
+    <h2>35+ dev tools. One toggle.</h2>
+    <p class="sub">Stop configuring each tool manually. Toggle once, proxy everywhere.</p>
+    <div class="tags">
+        <span class="tag">git</span><span class="tag">npm</span><span class="tag">yarn</span><span class="tag">pnpm</span>
+        <span class="tag">pip</span><span class="tag">conda</span><span class="tag">cargo</span><span class="tag">go</span>
+        <span class="tag">brew</span><span class="tag">docker</span><span class="tag">podman</span><span class="tag">pod</span>
+        <span class="tag">gradle</span><span class="tag">maven</span><span class="tag">composer</span><span class="tag">bun</span>
+        <span class="tag">gcloud</span><span class="tag">aws</span><span class="tag">kubectl</span><span class="tag">terraform</span>
+        <span class="tag">curl</span><span class="tag">wget</span><span class="tag">ollama</span><span class="tag">claude</span>
+        <span class="tag">swift</span><span class="tag">xcodebuild</span><span class="tag">adb</span><span class="tag">rsync</span>
+    </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="faq" id="faq"><div class="container">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-list">
+        <details class="faq-item"><summary>How long does setup take?</summary><p>Less than 5 minutes. Create a profile, enter your proxy address, toggle which dev tools you want, and click the power button. That's it.</p></details>
+        <details class="faq-item"><summary>Is it really $19 one-time? No subscription?</summary><p>Yes. One purchase, use forever. No monthly fees. Free updates within the major version. 14-day free trial to try before you buy.</p></details>
+        <details class="faq-item"><summary>What if it breaks my network settings?</summary><p>ProxiCat automatically backs up your system settings on first launch. One-click restore returns everything — env vars, system proxy, DNS, git config, npm config, /etc/hosts — to exactly how it was before.</p></details>
+        <details class="faq-item"><summary>Can I get a refund?</summary><p>Yes. 30-day money-back guarantee, no questions asked.</p></details>
+        <details class="faq-item"><summary>Does it work with my proxy client (Clash, V2Ray, Shadowsocks, etc.)?</summary><p>Yes. ProxiCat works with any local proxy that listens on HTTP or SOCKS5. It auto-detects 30+ known proxy clients and validates that ports match your configuration.</p></details>
+        <details class="faq-item"><summary>Why not just use System Preferences?</summary><p>System proxy only covers apps that read macOS proxy settings. Many CLI tools (git, npm, curl) and some GUI apps ignore it. ProxiCat covers 4 layers: shell env, system proxy, per-tool config, and system-level interception.</p></details>
+        <details class="faq-item"><summary>Does it support Apple Silicon (M1/M2/M3/M4)?</summary><p>Yes. ProxiCat is built natively with SwiftUI for arm64. No Rosetta needed. Runs on macOS 15 (Sequoia) and later.</p></details>
+    </div>
+</div></section>
+
+<!-- Final CTA -->
+<section class="cta-band"><div class="container">
+    <h2>Ready to stop configuring proxies manually?</h2>
+    <p>14-day free trial. $19 one-time. 30-day refund guarantee.</p>
+    <div class="cta-row">
+        <a href="https://github.com/proxicat/releases/releases" class="btn btn-primary">Download ProxiCat for Mac</a>
+    </div>
+</div></section>
+
+<footer><div class="container">
+    <div class="links">
+        <a href="https://github.com/proxicat/releases/releases">Download</a>
+        <a href="https://github.com/proxicat/releases/blob/main/PRIVACY.md">Privacy</a>
+        <a href="https://github.com/proxicat/releases/blob/main/TERMS.md">Terms</a>
+        <a href="https://github.com/proxicat/releases/blob/main/CHANGELOG.md">Changelog</a>
+        <a href="https://github.com/proxicat/releases/issues">Support</a>
+    </div>
+    <p>&copy; 2026 ProxiCat. Built with SwiftUI for macOS.</p>
+</div></footer>
+
 <script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "ProxiCat",
-    "operatingSystem": "macOS",
-    "applicationCategory": "UtilitiesApplication",
-    "description": "The modern proxy manager for macOS. Per-app proxy routing, dev tools integration, Wi-Fi auto-switch profiles.",
-    "url": "https://proxicat.github.io",
-    "downloadUrl": "https://github.com/proxicat/releases/releases",
-    "softwareVersion": "1.0.0",
-    "offers": {
-        "@type": "Offer",
-        "price": "19",
-        "priceCurrency": "USD"
-    }
-}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ProxiCat","operatingSystem":"macOS","applicationCategory":"UtilitiesApplication","description":"Per-app proxy routing for macOS. 35+ dev tools, Wi-Fi auto-switch, one-click toggle.","url":"https://proxicat.github.io","downloadUrl":"https://github.com/proxicat/releases/releases","softwareVersion":"1.0.0","offers":{"@type":"Offer","price":"19","priceCurrency":"USD"}}
 </script>
-
 </body>
 </html>
